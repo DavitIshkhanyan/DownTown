@@ -5,6 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        table {
+          border-collapse: collapse;
+        }
+    
+        td,
+        th {
+          border: 1px solid black;
+          padding: 3px;
+          text-align: center;
+        }
+    
+        th {
+          font-weight: bold;
+          background-color: #E6E6E6;
+        }
+      </style>
 </head>
 <body>
     <ol id="elem">
@@ -52,6 +69,40 @@
           </ul>
         </li>
       </ul>
+
+    <div id="calendar"></div>
+
+    <hr>
+
+    <!-- click on this button calls clockStart() -->
+    <input type="button" onclick="clockStart()" value="Start">
+
+    <!-- click on this button calls clockStop() -->
+    <input type="button" onclick="clockStop()" value="Stop">
+
+    <ul id="ul">
+        <li id="one">1</li>
+        <li id="two">4</li>
+    </ul>
+
+    <table id="table">
+        <thead>
+          <tr>
+            <th>Name</th><th>Surname</th><th>Age</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John</td><td>Smith</td><td>10</td>
+          </tr>
+          <tr>
+            <td>Pete</td><td>Brown</td><td>15</td>
+          </tr>
+          <tr>
+            <td>Ann</td><td>Lee</td><td>5</td>
+          </tr>
+        </tbody>
+    </table>
 
     <script src="main.js"></script>
 </body>

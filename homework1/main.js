@@ -1,11 +1,11 @@
 // Walking the DOM //
 
 // 1.
-console.log(document.body.children[0]);
-const div = document.body.firstElementChild;
-const ul = div.nextElementSibling;
-console.log(ul);
-console.log(ul.lastElementChild);
+// console.log(document.body.children[0]);
+// const div = document.body.firstElementChild;
+// const ul = div.nextElementSibling;
+// console.log(ul);
+// console.log(ul.lastElementChild);
 
 // 2
 // 1. Yes.
