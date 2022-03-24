@@ -1,0 +1,86 @@
+#messageForm {
+    margin: 10px;
+}
+#messageForm input:first-of-type {
+    width: 400px;
+}
+#userCheckbox {
+    margin: 10px;
+}
+.forms {
+    display: flex;
+}
+#container {
+    width: 70%;
+    height: 800px;
+    background-color: aquamarine;
+    /* bottom: -50px; */
+    /* left: 40px; */
+    overflow: auto;
+    display: flex;
+    flex: 1;
+    /* flex-wrap: wrap; */
+    /* justify-content:flex-end; */
+    flex-direction: column;
+    /* align-items: center; */
+}
+#container > :first-child {
+    margin-top: auto !important;
+    /* use !important to prevent breakage from child margin settings */
+}
+.message {
+    word-break: break-all;
+    white-space: normal;
+
+    flex: 0 1 auto;
+    cursor: pointer;
+    background-color: bisque;
+    width: fit-content;
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 30px;
+    /* width: 100%; */
+    /* position: absolute; */
+    /* top: 40px; */
+    vertical-align: text-bottom;
+
+    /* display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 10px; */
+
+    margin-top: 8px;    
+    margin-bottom: 8px;    
+}
+
+.sameUser1Message1 {
+    /* border-radius: 30px 30px 4px 30px; */
+    border-bottom-left-radius: 8px;
+    margin-bottom: 1px;
+}
+.sameUser1Message2 {
+    border-radius: 4px 30px 30px 8px;
+    margin: 1px;
+}
+.sameUser1Message3 {
+    /* border-radius: 30px 4px 30px 30px; */
+    border-top-left-radius: 8px;
+    margin-top: 1px;
+}
+.sameUser2Message1 {
+    border-radius: 30px 30px 8px 30px;
+    margin-bottom: 1px;
+}
+.sameUser2Message2 {
+    border-radius: 30px 8px 8px 30px;
+    margin: 1px;
+}
+.sameUser2Message3 {
+    border-radius: 30px 8px 30px 30px;
+    margin-top: 1px;
+}
+
+.user2 {
+    align-self: end;
+}
