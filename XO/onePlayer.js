@@ -2,22 +2,24 @@ let game = document.getElementById('game');
 let blocks = game.children;
 let refresh = document.getElementById('refresh');
 let gameOver = false;
+let nulls = new Array(9).fill(null);
+
 // let clickEvent = new Event('click');
 
 // appending blocks to game
 for (let i = 0; i < 9; i++) {
     let div = document.createElement('div');
     div.className = 'block';
-    div.dataset.key = i + 1;
+    div.dataset.key = i;
     game.append(div);
 }
 
 let statuses = ['x','o'];
 
 function getStorage() {
-    return JSON.parse(localStorage.getItem('game')) || [];
+    return JSON.parse(localStorage.getItem('game')) || nulls;
 }
-function setStorage(storage = []) {
+function setStorage(storage = nulls) {
     localStorage.setItem('game', JSON.stringify(storage));
 }
 
@@ -32,22 +34,25 @@ function changeStatus() {
     }
 }
 
-function renderItem({ id, text}) {
-    blocks[id - 1].append(text);
+function renderItem(text, index) {
+    let id = index;
+    if (text !== null) {
+        blocks[id].append(text);
+    }
 }
 
 function renderGame(storage) {
     const assigned = Array.from(document.getElementsByClassName('block'));
     assigned.forEach((element) => {element.innerHTML = ''});
-    storage.forEach((item) => {
-        renderItem(item);
+    storage.forEach((item,index) => {
+        renderItem(item,index);
     });
 }
 
 function checkWinner() {
     for (let i = 0; i < 9; i+=3) {
-        if (blocks[i].innerHTML === blocks[i + 1].innerHTML && blocks[i + 1].innerHTML === blocks[i + 2].innerHTML && blocks[i].innerHTML !== '') {
-            alert('Game Over.\nWinner is ' + blocks[i].innerHTML);
+        if (storage[i] === storage[i + 1] && storage[i + 1] === storage[i + 2] && storage[i] !== null) {
+            alert('Game Over.\nWinner is ' + storage[i]);
             // refresh.dispatchEvent(clickEvent);
             refresh.click();
             gameOver = true;
@@ -55,22 +60,22 @@ function checkWinner() {
         }
     }
     for (let i = 0; i < 3; i++) {
-        if (blocks[i].innerHTML === blocks[i + 3].innerHTML && blocks[i + 3].innerHTML === blocks[i + 6].innerHTML && blocks[i].innerHTML !== '') {
-            alert('Game Over.\nWinner is ' + blocks[i].innerHTML);
+        if (storage[i] === storage[i + 3] && storage[i + 3] === storage[i + 6] && storage[i] !== null) {
+            alert('Game Over.\nWinner is ' + storage[i]);
             // refresh.dispatchEvent(clickEvent);
             refresh.click();
             gameOver = true;
             break;
         }
     }
-    if (blocks[0].innerHTML === blocks[4].innerHTML && blocks[4].innerHTML === blocks[8].innerHTML && blocks[0].innerHTML !== '') {
-        alert('Game Over.\nWinner is ' + blocks[0].innerHTML);
+    if (storage[0] === storage[4] && storage[4] === storage[8] && storage[0] !== null) {
+        alert('Game Over.\nWinner is ' + storage[0]);
         // refresh.dispatchEvent(clickEvent);
         refresh.click();
         gameOver = true;
     }
-    if (blocks[2].innerHTML === blocks[4].innerHTML && blocks[4].innerHTML === blocks[6].innerHTML && blocks[2].innerHTML !== '') {
-        alert('Game Over.\nWinner is ' + blocks[2].innerHTML);
+    if (storage[2] === storage[4] && storage[4] === storage[6] && storage[2] !== null) {
+        alert('Game Over.\nWinner is ' + storage[2]);
         // refresh.dispatchEvent(clickEvent);
         refresh.click();
         gameOver = true;
@@ -85,52 +90,67 @@ function draw() {
 }
 
 function player2() {
-    let notAssigned = [1,2,3,4,5,6,7,8,9];
-    for (let i of storage) {
-        for (let j = 1; j < 10; j++) {
-            if (i.id === j) { 
-                var myIndex = notAssigned.indexOf(j);  
-                notAssigned.splice(myIndex, 1);
+    let notAssigned = [0,1,2,3,4,5,6,7,8];
+    for (let i = 0; i < 9; i++) {
+        if (storage[i] !== null) {
+            for (let j = 0; j < 9; j++) {
+                if (i === j) { 
+                    var myIndex = notAssigned.indexOf(j);  
+                    notAssigned.splice(myIndex, 1);
+                }
             }
         }
     }
     if(notAssigned.length === 0) {
-        draw();
+        renderGame(storage);
+        setTimeout(draw);
         return;
     }
     var rand = Math.floor(Math.random() * notAssigned.length);
+
     let id = notAssigned[rand];
-    const obj = {id: id, text: statuses[1]};
-    storage.push(obj);
+    storage[id] = statuses[1];
     setStorage(storage);
     renderGame(storage);
-    checkWinner();
+    setTimeout(() => {
+        checkWinner();
+        if (gameOver) {
+            gameOver = false;
+            return;
+        } 
+    });
+    // checkWinner();
 }
 
 game.addEventListener('click', function handleClick(event) {
     let alreadyAssigned = false;
-    storage.forEach((element) => {
-        if (element.id === +event.target.dataset.key) {
-            alreadyAssigned = true;
-            return;
-        };
-    });
+    let id = +event.target.dataset.key;
+    if (storage[id] !== null) {
+        alreadyAssigned = true;
+        // return;
+    }
     if (alreadyAssigned) return;
-    const obj = {id: +event.target.dataset.key, text: statuses[0]};
-    storage.push(obj);
+    storage[id] = statuses[0];
+
     setStorage(storage);
     renderGame(storage);
-    checkWinner();
-    if (gameOver) {
-        gameOver = false;
-        return;
-    } 
-    player2();
+
+    // checkWinner();
+    setTimeout(checkWinner);
+    setTimeout(() => {
+        if (gameOver) {
+            gameOver = false;
+            return;
+        }   
+
+        player2();
+    },100);
 });
 
 refresh.onclick = function handleRefresh() {
     setStorage();
     storage = getStorage();
     renderGame(storage);
+    gameOver = false;
 }
 
