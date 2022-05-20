@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="navigation" id="navigation">
+        <button class="button" id="b1">New Game</button>
+        <button class="button" id="b2">History</button>
+    </div>
+
+    <div class="main-div" id="main-div"></div>
+
+    <div class="game-over" id="game-over" hidden>
+        <h2>GAME OVER</h2>
+        <div class="gamer-content">
+            <div>
+                <p>Game ID</p>
+                <p id="game-id"></p>
+            </div>
+            <div>
+                <p>Time</p>
+                <p id="time"></p>
+            </div>
+        </div>        
+    </div>
+
+    <table class="history" id="history" hidden>
+        <tr>
+            <th>Game Id</th>
+            <th>Time</th>
+        </tr>
+    </table>
+
+    <script src="main.js"></script>
+</body>
+</html>

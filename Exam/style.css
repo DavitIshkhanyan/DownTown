@@ -1,0 +1,52 @@
+.navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+}
+
+.button {
+    background-color: white;
+    color: blue;
+    border-color: blue;
+    width: 200px;
+    height: 50px;
+    margin: 20px;
+}
+
+.main-div {
+    display: flex;
+    flex-wrap: wrap;
+}
+.game-rect {
+    background-color: dodgerblue;
+    width: 20%;
+    margin: 10px;
+    height: 100px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hidden {
+    background-color: white;
+}
+
+.game-over {
+    width: 80%;
+    margin: 0 auto;
+    color: dodgerblue;
+    text-align: center;
+    background-color: deepskyblue;
+    border-radius: 10px;
+}
+.gamer-content {
+    display: flex;
+    justify-content: space-around;
+}
+
+.history, .history th, .history td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
